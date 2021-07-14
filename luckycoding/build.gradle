@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group 'org.springframework'
+version '5.2.16.BUILD-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile(project(":spring-context"))
+    compile(project(":spring-aspects"))
+    compile(project(":spring-jdbc"))
+    compile('org.hsqldb:hsqldb:2.5.0') {
+        exclude group: 'org.slf4j'
+        transitive = false
+    }
+    compile 'com.zaxxer:HikariCP:3.4.2'
+    runtime 'mysql:mysql-connector-java:5.1.47'
+
+    testImplementation 'junit:junit:4.11'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
+
+test {
+    useJUnitPlatform()
+}
